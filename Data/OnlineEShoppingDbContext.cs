@@ -29,7 +29,7 @@ namespace onlineEShopping.Data
                 .OnDelete(DeleteBehavior.Cascade);     // Configuring ON DELETE CASCADE
             base.OnModelCreating(modelBuilder);
 
-            // Configuring ON DELETE CASCADE FOR Product
+    //         // Configuring ON DELETE CASCADE FOR Product
              modelBuilder.Entity<ProductModel>()
                 .HasOne(s => s.Category)
                 .WithMany(c => c.Products)
@@ -38,12 +38,13 @@ namespace onlineEShopping.Data
             base.OnModelCreating(modelBuilder);
 
             // Configuring ON DELETE CASCADE FOR Product
-             modelBuilder.Entity<ProductModel>()
-                .HasOne(s => s.SubCategories)
-                .WithMany(c => c.Products)
-                .HasForeignKey(s => s.SubCategoryId)
-                .OnDelete(DeleteBehavior.Cascade);     // Configuring ON DELETE CASCADE
-            base.OnModelCreating(modelBuilder);
+            //  modelBuilder.Entity<ProductModel>()
+            //     .HasOne(s => s.SubCategories)
+            //     .WithMany(c => c.Products)
+            //     .HasForeignKey(s => s.SubCategoryId)
+            //     .OnDelete(DeleteBehavior.Cascade);     // Configuring ON DELETE CASCADE
+            // base.OnModelCreating(modelBuilder);
         }
+    
     }
 }

@@ -12,8 +12,8 @@ using onlineEShopping.Data;
 namespace onlineEShopping.Migrations
 {
     [DbContext(typeof(OnlineEShoppingDbContext))]
-    [Migration("20240918110441_ProductMigration")]
-    partial class ProductMigration
+    [Migration("20240918123312_ProductMigrations")]
+    partial class ProductMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,6 +81,10 @@ namespace onlineEShopping.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProductImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -89,14 +93,14 @@ namespace onlineEShopping.Migrations
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductQuantity")
-                        .HasColumnType("int");
-
                     b.Property<string>("ProductSize")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SoldOut")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
                     b.Property<int?>("SubCategoriesSubCategoryId")

@@ -5,11 +5,15 @@
 namespace onlineEShopping.Migrations
 {
     /// <inheritdoc />
-    public partial class SubCateoryMigration : Migration
+    public partial class SubCategoryMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_ProductModel_SubCategoryModel_SubCategoriesSubCategoryId",
+                table: "ProductModel");
+
             migrationBuilder.DropForeignKey(
                 name: "FK_SubCategoryModel_Categories_CategoryId",
                 table: "SubCategoryModel");
@@ -33,6 +37,13 @@ namespace onlineEShopping.Migrations
                 column: "SubCategoryId");
 
             migrationBuilder.AddForeignKey(
+                name: "FK_ProductModel_SubCategories_SubCategoriesSubCategoryId",
+                table: "ProductModel",
+                column: "SubCategoriesSubCategoryId",
+                principalTable: "SubCategories",
+                principalColumn: "SubCategoryId");
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_SubCategories_Categories_CategoryId",
                 table: "SubCategories",
                 column: "CategoryId",
@@ -44,6 +55,10 @@ namespace onlineEShopping.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_ProductModel_SubCategories_SubCategoriesSubCategoryId",
+                table: "ProductModel");
+
             migrationBuilder.DropForeignKey(
                 name: "FK_SubCategories_Categories_CategoryId",
                 table: "SubCategories");
@@ -65,6 +80,13 @@ namespace onlineEShopping.Migrations
                 name: "PK_SubCategoryModel",
                 table: "SubCategoryModel",
                 column: "SubCategoryId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProductModel_SubCategoryModel_SubCategoriesSubCategoryId",
+                table: "ProductModel",
+                column: "SubCategoriesSubCategoryId",
+                principalTable: "SubCategoryModel",
+                principalColumn: "SubCategoryId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SubCategoryModel_Categories_CategoryId",

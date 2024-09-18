@@ -12,8 +12,8 @@ using onlineEShopping.Data;
 namespace onlineEShopping.Migrations
 {
     [DbContext(typeof(OnlineEShoppingDbContext))]
-    [Migration("20240917163941_CateoryMigration")]
-    partial class CateoryMigration
+    [Migration("20240918122410_SubCategoryMigration")]
+    partial class SubCategoryMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,6 +53,74 @@ namespace onlineEShopping.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("onlineEShopping.Models.Entities.ProductModel", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Colors")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCustomeSize")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProductDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductSize")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SoldOut")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SubCategoriesSubCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("SubCategoriesSubCategoryId");
+
+                    b.ToTable("ProductModel");
+                });
+
             modelBuilder.Entity("onlineEShopping.Models.Entities.SubCategoryModel", b =>
                 {
                     b.Property<int>("SubCategoryId")
@@ -79,7 +147,24 @@ namespace onlineEShopping.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("SubCategoryModel");
+                    b.ToTable("SubCategories");
+                });
+
+            modelBuilder.Entity("onlineEShopping.Models.Entities.ProductModel", b =>
+                {
+                    b.HasOne("onlineEShopping.Models.Entities.CategoryModel", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("onlineEShopping.Models.Entities.SubCategoryModel", "SubCategories")
+                        .WithMany("Products")
+                        .HasForeignKey("SubCategoriesSubCategoryId");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("SubCategories");
                 });
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.SubCategoryModel", b =>
@@ -95,7 +180,14 @@ namespace onlineEShopping.Migrations
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.CategoryModel", b =>
                 {
+                    b.Navigation("Products");
+
                     b.Navigation("Subcategories");
+                });
+
+            modelBuilder.Entity("onlineEShopping.Models.Entities.SubCategoryModel", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

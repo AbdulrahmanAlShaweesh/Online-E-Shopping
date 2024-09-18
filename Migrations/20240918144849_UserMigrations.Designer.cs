@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using onlineEShopping.Data;
 
@@ -11,9 +12,11 @@ using onlineEShopping.Data;
 namespace onlineEShopping.Migrations
 {
     [DbContext(typeof(OnlineEShoppingDbContext))]
-    partial class OnlineEShoppingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240918144849_UserMigrations")]
+    partial class UserMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,11 +171,10 @@ namespace onlineEShopping.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RolesRoleId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserAddress")
@@ -202,9 +204,13 @@ namespace onlineEShopping.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UsrId");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RolesRoleId");
 
                     b.ToTable("Users");
                 });
@@ -233,13 +239,11 @@ namespace onlineEShopping.Migrations
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.UserModel", b =>
                 {
-                    b.HasOne("onlineEShopping.Models.Entities.RoleModel", "Role")
+                    b.HasOne("onlineEShopping.Models.Entities.RoleModel", "Roles")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("RolesRoleId");
 
-                    b.Navigation("Role");
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.CategoryModel", b =>

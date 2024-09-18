@@ -19,7 +19,7 @@ namespace onlineEShopping.Data
          public DbSet<SubCategoryModel> SubCategories {get; set;}
          public DbSet<ProductModel> Products {get; set;}
          public DbSet<RoleModel> Roles {get; set;}
-
+        public DbSet<UserModel> Users {get; set;}
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
@@ -34,6 +34,15 @@ namespace onlineEShopping.Data
             .WithOne(p => p.SubCategories)
             .HasForeignKey(p => p.SubCategoryId)
             .OnDelete(DeleteBehavior.Cascade);
+
+              base.OnModelCreating(modelBuilder);
+
+        // Explicitly configure the one-to-many relationship between User and Role
+            modelBuilder.Entity<UserModel>()
+            .HasOne(u => u.Role)
+            .WithMany(r => r.Users)
+            .HasForeignKey(u => u.RoleId)
+            .OnDelete(DeleteBehavior.Restrict);  
         }
     }
 }

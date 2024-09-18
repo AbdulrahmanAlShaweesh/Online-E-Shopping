@@ -5,7 +5,7 @@
 namespace onlineEShopping.Migrations
 {
     /// <inheritdoc />
-    public partial class ProductMigrations : Migration
+    public partial class ProductMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

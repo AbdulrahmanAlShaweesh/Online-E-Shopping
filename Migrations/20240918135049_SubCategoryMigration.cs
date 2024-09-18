@@ -11,7 +11,7 @@ namespace onlineEShopping.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_ProductModel_SubCategoryModel_SubCategoriesSubCategoryId",
+                name: "FK_ProductModel_SubCategoryModel_SubCategoryId",
                 table: "ProductModel");
 
             migrationBuilder.DropForeignKey(
@@ -37,11 +37,12 @@ namespace onlineEShopping.Migrations
                 column: "SubCategoryId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ProductModel_SubCategories_SubCategoriesSubCategoryId",
+                name: "FK_ProductModel_SubCategories_SubCategoryId",
                 table: "ProductModel",
-                column: "SubCategoriesSubCategoryId",
+                column: "SubCategoryId",
                 principalTable: "SubCategories",
-                principalColumn: "SubCategoryId");
+                principalColumn: "SubCategoryId",
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SubCategories_Categories_CategoryId",
@@ -56,7 +57,7 @@ namespace onlineEShopping.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_ProductModel_SubCategories_SubCategoriesSubCategoryId",
+                name: "FK_ProductModel_SubCategories_SubCategoryId",
                 table: "ProductModel");
 
             migrationBuilder.DropForeignKey(
@@ -82,11 +83,12 @@ namespace onlineEShopping.Migrations
                 column: "SubCategoryId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ProductModel_SubCategoryModel_SubCategoriesSubCategoryId",
+                name: "FK_ProductModel_SubCategoryModel_SubCategoryId",
                 table: "ProductModel",
-                column: "SubCategoriesSubCategoryId",
+                column: "SubCategoryId",
                 principalTable: "SubCategoryModel",
-                principalColumn: "SubCategoryId");
+                principalColumn: "SubCategoryId",
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SubCategoryModel_Categories_CategoryId",

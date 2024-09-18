@@ -58,9 +58,6 @@ namespace onlineEShopping.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Colors")
                         .HasColumnType("int");
 
@@ -100,9 +97,6 @@ namespace onlineEShopping.Migrations
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubCategoriesSubCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
 
@@ -111,11 +105,9 @@ namespace onlineEShopping.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("SubCategoryId");
 
-                    b.HasIndex("SubCategoriesSubCategoryId");
-
-                    b.ToTable("Products");
+                    b.ToTable("ProductModel");
                 });
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.SubCategoryModel", b =>
@@ -149,17 +141,11 @@ namespace onlineEShopping.Migrations
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.ProductModel", b =>
                 {
-                    b.HasOne("onlineEShopping.Models.Entities.CategoryModel", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("onlineEShopping.Models.Entities.SubCategoryModel", "SubCategories")
                         .WithMany("Products")
-                        .HasForeignKey("SubCategoriesSubCategoryId");
-
-                    b.Navigation("Category");
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("SubCategories");
                 });
@@ -177,8 +163,6 @@ namespace onlineEShopping.Migrations
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.CategoryModel", b =>
                 {
-                    b.Navigation("Products");
-
                     b.Navigation("Subcategories");
                 });
 

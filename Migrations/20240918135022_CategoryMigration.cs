@@ -63,9 +63,7 @@ namespace onlineEShopping.Migrations
                     ProductSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Colors = table.Column<int>(type: "int", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false),
-                    SubCategoriesSubCategoryId = table.Column<int>(type: "int", nullable: true),
                     SoldOut = table.Column<int>(type: "int", nullable: false),
                     IsCustomeSize = table.Column<bool>(type: "bit", nullable: false),
                     isActive = table.Column<bool>(type: "bit", nullable: false),
@@ -75,27 +73,17 @@ namespace onlineEShopping.Migrations
                 {
                     table.PrimaryKey("PK_ProductModel", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_ProductModel_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductModel_SubCategoryModel_SubCategoriesSubCategoryId",
-                        column: x => x.SubCategoriesSubCategoryId,
+                        name: "FK_ProductModel_SubCategoryModel_SubCategoryId",
+                        column: x => x.SubCategoryId,
                         principalTable: "SubCategoryModel",
-                        principalColumn: "SubCategoryId");
+                        principalColumn: "SubCategoryId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductModel_CategoryId",
+                name: "IX_ProductModel_SubCategoryId",
                 table: "ProductModel",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductModel_SubCategoriesSubCategoryId",
-                table: "ProductModel",
-                column: "SubCategoriesSubCategoryId");
+                column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubCategoryModel_CategoryId",

@@ -23,7 +23,7 @@ namespace onlineEShopping.Models.Entities
         
         public ICollection<SubCategoryModel>? Subcategories {get; set;}
 
-        public ICollection<ProductModel>? Products {get; set;}
+        // public ICollection<ProductModel>? Products {get; set;}
 
     }
 }

@@ -23,8 +23,8 @@ namespace onlineEShopping.Models.Entities
         public string ProductSize {get; set;} = string.Empty; 
         public ProductColors Colors {get; set;}
         public string CompanyName {get; set;} = string.Empty;
-        public int CategoryId {get; set;} 
-        public CategoryModel? Category {get; set;}
+        // public int CategoryId {get; set;} 
+        // public CategoryModel? Category {get; set;}
         public int SubCategoryId {get; set;} 
         public SubCategoryModel? SubCategories {get; set;} 
         public int SoldOut {get; set;}     

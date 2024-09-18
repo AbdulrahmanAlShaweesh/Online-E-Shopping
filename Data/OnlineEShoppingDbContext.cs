@@ -24,6 +24,7 @@ namespace onlineEShopping.Data
          public DbSet<WishListModel> WishList {get; set;}
          public DbSet<ShoppingCart> Cart {get; set;} 
          public DbSet<ContactModel> Contacts {get; set;} 
+         public DbSet<PaymentModel> Payment {get; set;} 
          
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {

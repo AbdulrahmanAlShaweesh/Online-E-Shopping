@@ -25,7 +25,9 @@ namespace onlineEShopping.Data
          public DbSet<ShoppingCart> Cart {get; set;} 
          public DbSet<ContactModel> Contacts {get; set;} 
          public DbSet<PaymentModel> Payment {get; set;} 
-         
+         public DbSet<OrderModel> Orders {get; set;} 
+         public DbSet<OrderProduct> OrderProduct {get; set; }
+
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
              modelBuilder.Entity<CategoryModel>()
@@ -86,6 +88,32 @@ namespace onlineEShopping.Data
             .WithMany(r => r.Prodcuts)
             .HasForeignKey(r => r.ShoppingCartId)      // FK inside whishlist for peoduct
             .OnDelete(DeleteBehavior.Restrict);
-        }
+
+             modelBuilder.Entity<OrderProduct>()
+            .HasKey(op => new { op.OrderId, op.ProductId });
+            
+             modelBuilder.Entity<OrderProduct>()
+            .HasOne(op => op.Order)
+            .WithMany(o => o.OrderProducts)
+            .HasForeignKey(op => op.OrderId);
+
+             modelBuilder.Entity<OrderProduct>()
+            .HasOne(op => op.Product)
+            .WithMany(p => p.OrderProducts)
+            .HasForeignKey(op => op.ProductId);
+
+            modelBuilder.Entity<OrderModel>() 
+            .HasOne(r => r.Users)
+            .WithMany(r => r.Orders)
+            .HasForeignKey(r => r.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+             modelBuilder.Entity<OrderModel>()
+            .HasOne(o => o.Payment)
+            .WithOne(p => p.Order)
+            .HasForeignKey<OrderModel>(o => o.PaymentId);
+
+        }   
     }
 }
+

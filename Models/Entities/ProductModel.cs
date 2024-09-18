@@ -40,5 +40,7 @@ namespace onlineEShopping.Models.Entities
 
         public int ShoppingCartId {get; set;} 
         public ShoppingCart? Cart {get; set;}
+
+        public ICollection<OrderProduct>? OrderProducts {get; set;}
     }
 }

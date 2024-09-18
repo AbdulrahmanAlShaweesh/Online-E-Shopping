@@ -24,5 +24,7 @@ namespace onlineEShopping.Models.Entities
         public string EmailAddress {get; set;} = string.Empty; 
 
         public string PaymentMode {get; set;} = string.Empty; 
+
+        public OrderModel? Order {get; set;}
     }
 }

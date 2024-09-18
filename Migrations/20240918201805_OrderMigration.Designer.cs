@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using onlineEShopping.Data;
 
@@ -11,9 +12,11 @@ using onlineEShopping.Data;
 namespace onlineEShopping.Migrations
 {
     [DbContext(typeof(OnlineEShoppingDbContext))]
-    partial class OnlineEShoppingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240918201805_OrderMigration")]
+    partial class OrderMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,38 +104,12 @@ namespace onlineEShopping.Migrations
                     b.Property<int>("Orders")
                         .HasColumnType("int");
 
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("PaymentId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("onlineEShopping.Models.Entities.OrderProduct", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.PaymentModel", b =>
@@ -424,44 +401,6 @@ namespace onlineEShopping.Migrations
                     b.ToTable("WishList");
                 });
 
-            modelBuilder.Entity("onlineEShopping.Models.Entities.OrderModel", b =>
-                {
-                    b.HasOne("onlineEShopping.Models.Entities.PaymentModel", "Payment")
-                        .WithOne("Order")
-                        .HasForeignKey("onlineEShopping.Models.Entities.OrderModel", "PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("onlineEShopping.Models.Entities.UserModel", "Users")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Payment");
-
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("onlineEShopping.Models.Entities.OrderProduct", b =>
-                {
-                    b.HasOne("onlineEShopping.Models.Entities.OrderModel", "Order")
-                        .WithMany("OrderProducts")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("onlineEShopping.Models.Entities.ProductModel", "Product")
-                        .WithMany("OrderProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("onlineEShopping.Models.Entities.ProductModel", b =>
                 {
                     b.HasOne("onlineEShopping.Models.Entities.ShoppingCart", "Cart")
@@ -557,20 +496,8 @@ namespace onlineEShopping.Migrations
                     b.Navigation("Subcategories");
                 });
 
-            modelBuilder.Entity("onlineEShopping.Models.Entities.OrderModel", b =>
-                {
-                    b.Navigation("OrderProducts");
-                });
-
-            modelBuilder.Entity("onlineEShopping.Models.Entities.PaymentModel", b =>
-                {
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("onlineEShopping.Models.Entities.ProductModel", b =>
                 {
-                    b.Navigation("OrderProducts");
-
                     b.Navigation("Reviews");
 
                     b.Navigation("WishLists");
@@ -594,8 +521,6 @@ namespace onlineEShopping.Migrations
             modelBuilder.Entity("onlineEShopping.Models.Entities.UserModel", b =>
                 {
                     b.Navigation("Cart");
-
-                    b.Navigation("Orders");
 
                     b.Navigation("Reviews");
 

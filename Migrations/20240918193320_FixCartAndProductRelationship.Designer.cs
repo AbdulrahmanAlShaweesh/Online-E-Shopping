@@ -12,8 +12,8 @@ using onlineEShopping.Data;
 namespace onlineEShopping.Migrations
 {
     [DbContext(typeof(OnlineEShoppingDbContext))]
-    [Migration("20240918183821_CartMigration")]
-    partial class CartMigration
+    [Migration("20240918193320_FixCartAndProductRelationship")]
+    partial class FixCartAndProductRelationship
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,7 +176,10 @@ namespace onlineEShopping.Migrations
             modelBuilder.Entity("onlineEShopping.Models.Entities.ShoppingCart", b =>
                 {
                     b.Property<int>("CartId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
 
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
@@ -188,6 +191,8 @@ namespace onlineEShopping.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("CartId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cart");
                 });
@@ -304,7 +309,7 @@ namespace onlineEShopping.Migrations
                     b.HasOne("onlineEShopping.Models.Entities.ShoppingCart", "Cart")
                         .WithMany("Prodcuts")
                         .HasForeignKey("ShoppingCartId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("onlineEShopping.Models.Entities.SubCategoryModel", "SubCategories")
@@ -341,7 +346,7 @@ namespace onlineEShopping.Migrations
                 {
                     b.HasOne("onlineEShopping.Models.Entities.UserModel", "Users")
                         .WithMany("Cart")
-                        .HasForeignKey("CartId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

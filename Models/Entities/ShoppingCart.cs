@@ -16,6 +16,7 @@ namespace onlineEShopping.Models.Entities
          
          public int UserId {get; set;}
          public UserModel? Users {get; set;}
+         
          public DateTime AddedDate {get; set;}
     }
 }

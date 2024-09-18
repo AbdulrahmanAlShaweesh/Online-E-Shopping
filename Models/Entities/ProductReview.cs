@@ -26,5 +26,7 @@ namespace onlineEShopping.Models.Entities
 
         public int ProductId {get; set;}
         public ProductModel? Products {get; set;}
+
+        
     }
 }

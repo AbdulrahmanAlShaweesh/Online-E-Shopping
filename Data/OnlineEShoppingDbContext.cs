@@ -23,7 +23,8 @@ namespace onlineEShopping.Data
          public DbSet<ProductReview> Review {get; set;}
          public DbSet<WishListModel> WishList {get; set;}
          public DbSet<ShoppingCart> Cart {get; set;} 
-          
+         public DbSet<ContactModel> Contacts {get; set;} 
+         
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
              modelBuilder.Entity<CategoryModel>()

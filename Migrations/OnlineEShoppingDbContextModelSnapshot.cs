@@ -107,7 +107,7 @@ namespace onlineEShopping.Migrations
 
                     b.HasIndex("SubCategoryId");
 
-                    b.ToTable("ProductModel");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.SubCategoryModel", b =>

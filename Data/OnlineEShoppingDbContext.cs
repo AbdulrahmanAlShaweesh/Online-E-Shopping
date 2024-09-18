@@ -17,7 +17,7 @@ namespace onlineEShopping.Data
 
          public DbSet<CategoryModel> Categories {get; set;}
          public DbSet<SubCategoryModel> SubCategories {get; set;}
-        //  public DbSet<ProductModel> Products {get; set;}
+         public DbSet<ProductModel> Products {get; set;}
 
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,6 +34,5 @@ namespace onlineEShopping.Data
             .HasForeignKey(p => p.SubCategoryId)
             .OnDelete(DeleteBehavior.Cascade);
         }
-    
     }
 }

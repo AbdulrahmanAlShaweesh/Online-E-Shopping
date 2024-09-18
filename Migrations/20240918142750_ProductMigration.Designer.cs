@@ -12,8 +12,8 @@ using onlineEShopping.Data;
 namespace onlineEShopping.Migrations
 {
     [DbContext(typeof(OnlineEShoppingDbContext))]
-    [Migration("20240918135022_CategoryMigration")]
-    partial class CategoryMigration
+    [Migration("20240918142750_ProductMigration")]
+    partial class ProductMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,7 +110,7 @@ namespace onlineEShopping.Migrations
 
                     b.HasIndex("SubCategoryId");
 
-                    b.ToTable("ProductModel");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.SubCategoryModel", b =>
@@ -139,7 +139,7 @@ namespace onlineEShopping.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("SubCategoryModel");
+                    b.ToTable("SubCategories");
                 });
 
             modelBuilder.Entity("onlineEShopping.Models.Entities.ProductModel", b =>

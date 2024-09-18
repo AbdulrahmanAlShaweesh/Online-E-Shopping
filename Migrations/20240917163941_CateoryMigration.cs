@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace onlineEShopping.Migrations
 {
     /// <inheritdoc />
-    public partial class CategoryMigration : Migration
+    public partial class CateoryMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

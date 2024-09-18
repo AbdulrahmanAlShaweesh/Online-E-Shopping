@@ -35,5 +35,7 @@ namespace onlineEShopping.Models.Entities
         public DateTime CreatedDate {get; set;}
 
         public ICollection<ProductReview>? Reviews {get; set;}
+
+        public ICollection<WishListModel>? WishLists {get; set;}
     }
 }

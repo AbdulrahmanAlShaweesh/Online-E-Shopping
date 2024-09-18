@@ -19,9 +19,9 @@ namespace onlineEShopping.Data
          public DbSet<SubCategoryModel> SubCategories {get; set;}
          public DbSet<ProductModel> Products {get; set;}
          public DbSet<RoleModel> Roles {get; set;}
-        public DbSet<UserModel> Users {get; set;}
-        public DbSet<ProductReview> Review {get; set;}
-
+         public DbSet<UserModel> Users {get; set;}
+         public DbSet<ProductReview> Review {get; set;}
+         public DbSet<WishListModel> WishList {get; set;}
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
@@ -40,11 +40,11 @@ namespace onlineEShopping.Data
               base.OnModelCreating(modelBuilder);           
 
             // Explicitly configure the one-to-many relationship between User and Role
-                modelBuilder.Entity<UserModel>()
-                .HasOne(u => u.Role)
-                .WithMany(r => r.Users)
-                .HasForeignKey(u => u.RoleId)
-                .OnDelete(DeleteBehavior.Restrict); 
+            modelBuilder.Entity<UserModel>()
+            .HasOne(u => u.Role)
+            .WithMany(r => r.Users)
+            .HasForeignKey(u => u.RoleId)
+            .OnDelete(DeleteBehavior.Restrict); 
 
             // Configure Review-Product relationship with Cascade Delete
             modelBuilder.Entity<ProductReview>()
@@ -60,6 +60,17 @@ namespace onlineEShopping.Data
             .HasForeignKey(r => r.UserId)
             .OnDelete(DeleteBehavior.Cascade); // Delete reviews when a user is deleted
 
+            modelBuilder.Entity<WishListModel>() 
+            .HasOne(r => r.User)
+            .WithMany(r => r.WishList)
+            .HasForeignKey(r => r.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<WishListModel>() 
+            .HasOne(r => r.Products)
+            .WithMany(r => r.WishLists)
+            .HasForeignKey(r => r.ProductId)      // FK inside whishlist for peoduct
+            .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

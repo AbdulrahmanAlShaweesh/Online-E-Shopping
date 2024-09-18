@@ -27,7 +27,9 @@ namespace onlineEShopping.Models.Entities
 
         public int PaymentId {get; set; }
         public PaymentModel? Payment {get; set;} 
-
+    
+        [Required]
+        public bool IsCanceled {get; set;} 
 
     }
 }

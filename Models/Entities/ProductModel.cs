@@ -33,5 +33,7 @@ namespace onlineEShopping.Models.Entities
         public bool isActive {get; set;} 
         [Required]
         public DateTime CreatedDate {get; set;}
+
+        public ICollection<ProductReview>? Reviews {get; set;}
     }
 }

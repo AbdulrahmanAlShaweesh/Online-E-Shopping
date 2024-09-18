@@ -20,6 +20,8 @@ namespace onlineEShopping.Data
          public DbSet<ProductModel> Products {get; set;}
          public DbSet<RoleModel> Roles {get; set;}
         public DbSet<UserModel> Users {get; set;}
+        public DbSet<ProductReview> Review {get; set;}
+
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
@@ -35,14 +37,30 @@ namespace onlineEShopping.Data
             .HasForeignKey(p => p.SubCategoryId)
             .OnDelete(DeleteBehavior.Cascade);
 
-              base.OnModelCreating(modelBuilder);
+              base.OnModelCreating(modelBuilder);           
 
-        // Explicitly configure the one-to-many relationship between User and Role
-            modelBuilder.Entity<UserModel>()
-            .HasOne(u => u.Role)
-            .WithMany(r => r.Users)
-            .HasForeignKey(u => u.RoleId)
-            .OnDelete(DeleteBehavior.Restrict);  
+            // Explicitly configure the one-to-many relationship between User and Role
+                modelBuilder.Entity<UserModel>()
+                .HasOne(u => u.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(u => u.RoleId)
+                .OnDelete(DeleteBehavior.Restrict); 
+
+            // Configure Review-Product relationship with Cascade Delete
+            modelBuilder.Entity<ProductReview>()
+            .HasOne(r => r.Products)
+            .WithMany(p => p.Reviews)
+            .HasForeignKey(r => r.ProductId)
+            .OnDelete(DeleteBehavior.Cascade); // Delete reviews when a product is deleted
+
+            // Configure Review-User relationship with Cascade Delete
+            modelBuilder.Entity<ProductReview>()
+            .HasOne(r => r.Users)
+            .WithMany(u => u.Reviews)
+            .HasForeignKey(r => r.UserId)
+            .OnDelete(DeleteBehavior.Cascade); // Delete reviews when a user is deleted
+
+
         }
     }
 }

@@ -40,5 +40,7 @@ namespace onlineEShopping.Models.Entities
         public ICollection<ProductReview>? Reviews {get; set;}
 
         public ICollection<WishListModel>? WishList {get; set;}
+
+        public ICollection<ShoppingCart>? Cart {get; set;}
     }
 }

@@ -22,7 +22,8 @@ namespace onlineEShopping.Data
          public DbSet<UserModel> Users {get; set;}
          public DbSet<ProductReview> Review {get; set;}
          public DbSet<WishListModel> WishList {get; set;}
-
+         public DbSet<ShoppingCart> Cart {get; set;} 
+         
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
              modelBuilder.Entity<CategoryModel>()
@@ -70,6 +71,18 @@ namespace onlineEShopping.Data
             .HasOne(r => r.Products)
             .WithMany(r => r.WishLists)
             .HasForeignKey(r => r.ProductId)      // FK inside whishlist for peoduct
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ShoppingCart>() 
+            .HasOne(r => r.Users)
+            .WithMany(r => r.Cart)
+            .HasForeignKey(r => r.CartId)      // FK inside whishlist for peoduct
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ProductModel>() 
+            .HasOne(r => r.Cart)
+            .WithMany(r => r.Prodcuts)
+            .HasForeignKey(r => r.ShoppingCartId)      // FK inside whishlist for peoduct
             .OnDelete(DeleteBehavior.Cascade);
 
         }

@@ -13,7 +13,7 @@ namespace onlineEShopping.Controllers
     
     public class CategoryController : Controller
     {
-        private readonly OnlineEShoppingDbContext? _Dbcontext;
+        private readonly OnlineEShoppingDbContext _Dbcontext;
 
         public CategoryController(OnlineEShoppingDbContext dbContext)
         {   

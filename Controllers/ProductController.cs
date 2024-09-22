@@ -11,21 +11,19 @@ using onlineEShopping.Data;
 namespace onlineEShopping.Controllers
 {
      
-    public class PaymentController : Controller
+    public class ProductController : Controller
     {
         private readonly OnlineEShoppingDbContext _dbContext; 
 
-        public PaymentController(OnlineEShoppingDbContext dbContext)
+        public ProductController(OnlineEShoppingDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<IActionResult> Index() {
-            var response = await _dbContext.Payment.ToListAsync();
+            var response = await _dbContext.Products.ToListAsync();
 
             return View(response);
         }
     }
 }
-
- 

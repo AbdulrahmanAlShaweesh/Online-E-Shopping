@@ -10,9 +10,11 @@ namespace onlineEShopping.Models.Entities
     {
         [Key]
         public int SubCategoryId {get; set;} 
+
         [StringLength(100, ErrorMessage ="The Name's Length between 0-100")]
         [Required]
         public string SubCategoryName {get; set;} = string.Empty;
+        
         [Required]
         public bool isActive {get; set;} 
 

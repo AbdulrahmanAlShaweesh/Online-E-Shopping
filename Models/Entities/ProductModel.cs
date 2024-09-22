@@ -21,7 +21,7 @@ namespace onlineEShopping.Models.Entities
         public decimal ProductPrice {get; set;} 
         public int StockQuantity {get; set;}
         public string ProductSize {get; set;} = string.Empty; 
-        public ProductColors Colors {get; set;}
+        public List<ProductColors>? Colors {get; set;}
         public string CompanyName {get; set;} = string.Empty;
         // public int CategoryId {get; set;} 
         // public CategoryModel? Category {get; set;}

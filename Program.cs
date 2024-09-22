@@ -12,6 +12,7 @@ builder.Services.AddDbContext<OnlineEShoppingDbContext>(options => {
 
 var app = builder.Build();
 
+OnlineEShoppingDbInitializer.Seed(app.Services);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

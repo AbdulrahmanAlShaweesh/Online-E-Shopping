@@ -11,17 +11,17 @@ using onlineEShopping.Data;
 namespace onlineEShopping.Controllers
 {
      
-    public class RoleController : Controller
+    public class CartController : Controller
     {
         private readonly OnlineEShoppingDbContext _dbContext; 
 
-        public RoleController(OnlineEShoppingDbContext dbContext)
+        public CartController(OnlineEShoppingDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<IActionResult> Index() {
-            var response = await _dbContext.Roles.ToListAsync(); 
+            var response = await _dbContext.Cart.ToListAsync(); 
 
             return View(response);
         }

@@ -7,34 +7,86 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/onlineEShopping.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <link rel="stylesheet" href="./style.css"/>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">onlineEShopping</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <nav class="navbar navbar-expand-lg navbar-light  d-flex align-items-center pt-5 fixed-top" style="height: 100px;">
+        <div class="container-fluid" style="width: 90%; margin:auto">
+             <div class="d-flex" style="width: auto; w-3 mx-auto; cursor: pointer" style="width: 8%; margin-right: 30px;">
+                <span style="font-size: 23px; font-weight: bold; width: 35px; height: 35px; background-color: #fefefd; box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);" class="d-flex align-items-center justify-content-center ms-1">O</span>
+                <span style="font-size: 23px; font-weight: bold; width: 35px; height: 35px; background-color: #fefefd; box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);" class="d-flex align-items-center justify-content-center">E</span>
+                <span style="width: 35px; height: 35px; font-size: 25px; margin-left: 40px; padding-right: 14px;" class="d-flex align-items-center justify-content-center me-5">Shopper</span>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto  mb-2 mb-lg-0">
+                    <li class="nav-item mt-4 mt-md-0">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop Detials</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+
+                <div class="d-flex align-items-center" style="height: 100%;">
+                    <form class="d-flex">
+                        <div class="input-group">
+                            <input class="form-control no-outline" type="search" placeholder="Search" aria-label="Search">
+                            <span class="input-group-text bg-white border-0">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                        </div>
+                    </form>
+
+                    <div class="d-flex  align-items-center ms">  
+                        <p class="mb-0 me-3"><i class="fa-regular fa-heart" style="font-size: 20px;"></i></p>  
+                        <p class="mb-0 me-3"><i class="fa-solid fa-cart-shopping" style="font-size: 20px;"></i></p>
+                        <div class="dropdown">
+                                
+                            <div class="mb-0 profile dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="width: 30px; height: 30px; background-color: #db4344; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                <i class="fa fa-user" style="color: #fff;"></i>
+                            </div>
+
+                            
+                            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+        @RenderBody()
+    </main>     
 
     <footer class="border-top footer text-muted">
         <div class="container">

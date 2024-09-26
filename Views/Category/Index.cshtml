@@ -1,10 +1,18 @@
 
-@model List<onlineEShopping.Models.Entities.CategoryModel> 
+@model IEnumerable<onlineEShopping.Models.Entities.CategoryModel> 
 
 <table>
     <thead>
         <tr>
-            <th>@Model[0].CategoryName</th>
+            <th>@Html.DisplayNameFor(Model => Model.CategoryName)</th>
+            
         </tr>
     </thead>
+    <tbody>
+       @foreach(var category in Model){
+             <tr>
+                <td>@category.CategoryName</td>
+            </tr>
+       }
+    </tbody>
 </table>
